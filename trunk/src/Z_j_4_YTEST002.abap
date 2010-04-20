@@ -1,0 +1,31 @@
+report  z_j_4_ytest002.
+*定义工作区
+data a_spfli type ytcity.
+*定义内表，请注意有header line
+data ta_spfli type table of ytcity with header line.
+*分隔线
+uline.
+write / 'use workspace'.
+uline.
+*将数据表逐行转移至工作区，只读首5行
+select * into corresponding fields of a_spfli from ytcity up to 4 rows.
+  write: / a_spfli-yct_id, a_spfli-yct_name, a_spfli-yct_country
+          left-justified.
+endselect.
+uline.
+write / 'use inner table'.
+uline.
+select * into corresponding fields of
+         table ta_spfli from ytcity up to 3 rows.
+*从数据表读数据至内表，直接从内表输出
+*如果ta_spfli没有定义header line,会出错
+loop at ta_spfli.
+  write: / a_spfli-yct_id, a_spfli-yct_name, a_spfli-yct_country
+          left-justified.
+endloop.
+uline.
+
+loop at ta_spfli into a_spfli. " 内表数据的输出
+  write: / a_spfli-yct_id, a_spfli-yct_name, a_spfli-yct_country
+          left-justified.
+endloop.
