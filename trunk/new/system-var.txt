@@ -1,0 +1,18 @@
+sy-pagno 当前页号
+sy-lsind 当前索引页
+sy-datum 当前时间
+sy-linsz 当前报表宽度
+sy-linct 当前报表长度
+sy-listi 上一个列表的索引
+sy-lilli 绝对列表中选定的行号
+sy-curow 屏幕上的行
+space    空字串
+sy-cucol 光标列
+sy-subrc 执行状态 0	表示成功	
+sy-cpage 列表的当前显示页
+sy-uname 用户名
+sy-uzeit 当前时间
+sy-tcode 当前的 tcode
+sy-staro 真实行号
+sy-lisel 选择行的内容，长度为 255
+sy-linno 当前行                     

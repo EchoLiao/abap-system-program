@@ -1,0 +1,12 @@
+format color <n> [on] intensified [on|off] inverse [on|off]
+color	参数:
+col_background    取决于gui
+col_heading       灰蓝
+col_normal        淡灰
+col_total         黄
+col_key           黄绿
+col_positive      绿
+col_negative      红
+col_group         紫
+intensified       参数：背景颜色参数。
+inverse           参数：是否影响前景颜色
