@@ -1,5 +1,4 @@
-* ĞŞ¸ÄÄÚ±íÊı¾İ
-* Ê¹ÓÃË÷Òı²åÈëÄÚ±íĞĞ
+* ä¿®æ”¹å†…è¡¨æ•°æ®
 report  ytest001.
 
 data:   begin of man, 
@@ -19,7 +18,7 @@ man-name = 'LIU'.
 man-high = '1.78'.
 man-weight = 160. 
 " insert man into table man1.
-insert man into man1 index 2. " ÔÚµÚ2ĞĞ²åÈë, Ô­µÚ2ĞĞÒÔºóµÄÒÀ´ÎÍùºóÍÆÒÆ, (²»ÄÜÓÃÓÚhashed±í)
+insert man into man1 index 2. " åœ¨ç¬¬2è¡Œæ’å…¥, åŸç¬¬2è¡Œä»¥åçš„ä¾æ¬¡å¾€åæ¨ç§», (ä¸èƒ½ç”¨äºhashedè¡¨)
 
 loop at man1 into man.
   write: / man-name,man-high, man-weight.
