@@ -1,0 +1,6 @@
+老白的ABAP博客 
+http://blog.chinaunix.net/u1/40527/article_58058.html
+
+
+外部数据库的连接串示例（Tcode：DBCO） by 强 晟
+http://scnblogs.techweb.com.cn/qiangsheng/
