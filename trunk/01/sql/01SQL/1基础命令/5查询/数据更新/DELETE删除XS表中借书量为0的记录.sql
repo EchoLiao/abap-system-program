@@ -1,0 +1,4 @@
+USE XSBOOK
+DELETE FROM XS
+	WHERE ΩË È¡ø = 0
+go

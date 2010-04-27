@@ -1,0 +1,6 @@
+ALTER DATABASE DB1
+	MODIFY FILE
+	(NAME=DB1_DATA,
+	FILEGROWTH=4MB,  /* 改变主数据文件增长方式 */
+	MAXSIZE=UNLIMITED) /* 将主数据文件最大大小改为不限制 */
+GO
