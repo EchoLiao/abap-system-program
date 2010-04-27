@@ -4,3 +4,24 @@ http://blog.chinaunix.net/u1/40527/article_58058.html
 
 外部数据库的连接串示例（Tcode：DBCO） by 强 晟
 http://scnblogs.techweb.com.cn/qiangsheng/
+
+SAP下用DBCO连接Sql2000.????
+http://ms.itpub.net/thread-1064402-1-12.html
+
+dbco连接oracle数据库的问题
+http://blog.csdn.net/lvzhqi/archive/2009/07/31/4397166.aspx
+
+外部数据库的连接串示例（Tcode：DBCO）
+http://vcpeter.blog.163.com/blog/static/50260206201032154924737/
+
+如何从SAP中连接其他数据库
+http://www.sapsky.com/html/2006-11/611.htm
+
+SAP连接外部ORACLE数据库
+http://chenluizhong.blog.163.com/blog/static/4663926201002110161471/
+
+ 如何从SAP中连接其他数据库
+http://blog.csdn.net/CompassButton/archive/2006/08/30/1144319.aspx
+
+如何在ABAP里操作别的数据库，如SQL Server
+http://www.erphome.net/wdb/wdbread.php?forumid=14&filename=f_1855
