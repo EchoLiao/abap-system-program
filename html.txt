@@ -1,27 +1,63 @@
-ÀÏ°×µÄABAP²©¿Í 
+SAP R/3 æŠ€æœ¯ä¸å®ç°
+http://www.ithome-cn.net/book/sapr3book.htm
+
+å…å®‰è£…Oracleå®¢æˆ·ç«¯ä½¿ç”¨PL/SQLè¿æ¥Oracle
+http://www.cnblogs.com/elegantok/archive/2008/11/13/1332794.html
+
+è¯·æ•™ä¸€ä¸ªç”¨ABAPè¿æ¥ä¸€ä¸ªå…¶ä»–æœåŠ¡å™¨æ•°æ®åº“çš„é—®é¢˜    
+http://forums.sdn.sap.com/message.jspa?messageID=7949213
+
+SAP ä¸­å›½
+http://www.sap.com/china/index.epx
+
+ABAPç¼–ç¨‹ä»å…¥é—¨åˆ°ç²¾é€š 
+http://tech.it168.com/focus/200907/SAPABAP090713/index.html
+
+è¯¦å°½çš„ABAPå¼€å‘èµ„æ–™_è½¯ä»¶ä¸‹è½½
+http://download.pcpop.com/Soft/296392.html
+
+ABAP--å…³äºOO ABAPçš„å­¦ä¹ èµ„æ–™è¿æ¥åˆ—è¡¨
+http://silverw0396.javaeye.com/blog/229399
+
+éå¸¸å¥½çš„ABAPèµ„æ–™
+http://www.itpub.net/thread-876107-2-6.html
+
+Abapç¼–ç¨‹æ‰‹å†Œ.
+http://www.ceolib.com/downzl/215299.shtm
+
+ABAPä¾‹ç¨‹å¤§å…¨
+http://www.45oa.com/soft/html/56.html
+
+çœ‹å®ä¾‹å­¦ä¹ ABAPé¢å‘å¯¹è±¡ç¼–ç¨‹
+http://tech.it168.com/a2009/0707/601/000000601910.shtml
+
+ABAPå¼€å‘å·¥å…·ä¸‹è½½ï¼Œå¼€å‘ç¯å¢ƒé…ç½®
+http://www.itpub.net/thread-1191617-1-1.html
+=======
+?Ï°×µ?ABAP???? 
 http://blog.chinaunix.net/u1/40527/article_58058.html
 
 
-Íâ²¿Êı¾İ¿âµÄÁ¬½Ó´®Ê¾Àı£¨Tcode£ºDBCO£© by Ç¿ êÉ
+?â²¿???İ¿???Á¬?Ó´?Ê¾????Tcode??DBCO?? by Ç¿ ??
 http://scnblogs.techweb.com.cn/qiangsheng/
 
-SAPÏÂÓÃDBCOÁ¬½ÓSql2000.????
+SAP????DBCOÁ¬??Sql2000.????
 http://ms.itpub.net/thread-1064402-1-12.html
 
-dbcoÁ¬½ÓoracleÊı¾İ¿âµÄÎÊÌâ
+dbcoÁ¬??oracle???İ¿???????
 http://blog.csdn.net/lvzhqi/archive/2009/07/31/4397166.aspx
 
-Íâ²¿Êı¾İ¿âµÄÁ¬½Ó´®Ê¾Àı£¨Tcode£ºDBCO£©
+?â²¿???İ¿???Á¬?Ó´?Ê¾????Tcode??DBCO??
 http://vcpeter.blog.163.com/blog/static/50260206201032154924737/
 
-ÈçºÎ´ÓSAPÖĞÁ¬½ÓÆäËûÊı¾İ¿â
+???Î´?SAP??Á¬?????????İ¿?
 http://www.sapsky.com/html/2006-11/611.htm
 
-SAPÁ¬½ÓÍâ²¿ORACLEÊı¾İ¿â
+SAPÁ¬???â²¿ORACLE???İ¿?
 http://chenluizhong.blog.163.com/blog/static/4663926201002110161471/
 
- ÈçºÎ´ÓSAPÖĞÁ¬½ÓÆäËûÊı¾İ¿â
+ ???Î´?SAP??Á¬?????????İ¿?
 http://blog.csdn.net/CompassButton/archive/2006/08/30/1144319.aspx
 
-ÈçºÎÔÚABAPÀï²Ù×÷±ğµÄÊı¾İ¿â£¬ÈçSQL Server
+??????ABAP?????????????İ¿â£¬??SQL Server
 http://www.erphome.net/wdb/wdbread.php?forumid=14&filename=f_1855
