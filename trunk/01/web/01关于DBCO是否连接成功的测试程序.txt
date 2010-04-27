@@ -1,0 +1,69 @@
+01关于DBCO是否连接成功的测试程序
+2008年06月05日 星期四 下午 05:03
+
+DATA: dbconn(20).
+
+TRY.
+    EXEC SQL .
+      CONNECT TO 'Z_CONN'
+    ENDEXEC.
+    EXEC SQL.
+      SET CONNECTION 'Z_CONN'
+    ENDEXEC.
+    EXEC SQL.
+      GET CONNECTION :dbconn
+    ENDEXEC.
+    EXEC SQL.
+      DISCONNECT 'Z_CONN'
+    ENDEXEC.
+ENDTRY.
+
+IF dbconn = 'Z_CONN'.
+WRITE : / '数据库Z_CONN连接成功' .
+EXIT.
+ENDIF.
+
+#=============================================================================
+When you want to set up external database connection, you need to use DBCO Transaction.
+
+When using DBCO you are setting up the properties for an external database.
+
+REPORT ztest.
+
+DATA: BEGIN OF wa,
+ncust(40) TYPE c,
+name(35) TYPE c,
+END OF wa.
+
+DATA: dbs TYPE dbcon-con_name.
+DATA: con(20) TYPE c.
+DATA : ls_wa LIKE wa.
+
+con = ‘TREMS’. “DB Connection you made in DBCO
+
+EXEC SQL.
+connect to :con
+
+ENDEXEC.
+
+EXEC SQL.
+GET CONNECTION :con
+ENDEXEC.
+
+WRITE : con.
+
+EXEC SQL PERFORMING loop_write.
+select ncust, name from cust into :ls_wa
+ENDEXEC.
+
+*
+**&———————————————————————*
+**& Form LOOP_OUTPUT
+**&———————————————————————*
+** text
+**———————————————————————-*
+FORM loop_output.
+WRITE: / ls_wa-ncust,
+ls_wa-name.
+ENDFORM. “LOOP_WRITE ENDLOOP.
+
