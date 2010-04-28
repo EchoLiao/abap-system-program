@@ -26,7 +26,8 @@ if exists(select name from sysobjects where name='Course' and type='U')
 	drop table Course
 go
 create table Course
-(Cno char(2) not null primary key,
+(
+Cno char(2) not null primary key,
 Cname char(20) not null, 
 Cpno char(2),-- foreign key references Course(Cno),
 Ccredit smallint not null,
@@ -48,4 +49,5 @@ Cno char(2) not null foreign key references Course(Cno),
 Grade smallint check(Grade>=0)  default 0,
 primary key (Sno,Cno),
 constraint sc_fk2 foreign key (cno) references course(cno) on delete no action  on update cascade,
+)
 
