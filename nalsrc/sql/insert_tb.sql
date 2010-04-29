@@ -54,6 +54,7 @@ if exists(select name from sysobjects where name='ins_hbbz' and type='p')
 if exists(select name from sysobjects where name='ins_kptt' and type='p')
 	drop procedure ins_kptt
 go
+go
 create procedure ins_zhhz -- 账户组
     @id char(9), @cha char(10), @note char(100)=''
     as insert into zhhz(id, cha, note)
@@ -73,9 +74,9 @@ create procedure ins_zhtt -- 账户
 
 go
 create procedure ins_khtt -- 客户
-    @shdfid char(9), @sodfid char(9), @shpfid char(9), @fukfid char(9)
-    as insert into khtt(shdfid, sodfid, shpfid, fukfid)
-	values (@shdfid, @sodfid, @shpfid, @fukfid)
+    @id char(9), @shdfid char(9), @sodfid char(9), @shpfid char(9), @fukfid char(9)
+    as insert into khtt(id, shdfid, sodfid, shpfid, fukfid)
+	values (@id, @shdfid, @sodfid, @shpfid, @fukfid)
 
 go
 create procedure ins_qxtt -- 权限
@@ -100,7 +101,7 @@ go
 create procedure ins_xsxz -- 销售小组
     @id char(3), @name char(20), @leader char(9), @hotpro char(9),
     @riqi char(10), @note char(100)=''
-    as insert into xsxz(id, name, Leader, hotpro, riqi, note)
+    as insert into xsxz(id, name, leader, hotpro, riqi, note)
 	values (@id, @name, @leader, @hotpro, @riqi, @note)
 
 go
@@ -170,7 +171,7 @@ create procedure ins_kctt -- 库存
     @prodid char(9), @ckttid char(3), @count int, @note char(100)=''
     as insert into kctt(prodid, ckttid, count, note)
 	values (@prodid, @ckttid, @count, @note)
-    
+
 go
 create procedure ins_phdt -- 配货单
     @id char(9), @riqi char(10), @note char(100)=''
@@ -216,8 +217,8 @@ go
 create procedure ins_kptt -- 开票
     @phdtid char(9), @sodfid char(9), @shpfid char(9), @fukfid char(9), @riqi  char(10),
     @class  char(3), @price float, @taxlv float, @bz char(3), @note char(100)=''
-    as insert into kptt(phdtid, sodfid, shpfid, fukfid, riqi, 
+    as insert into kptt(phdtid, sodfid, shpfid, fukfid, riqi,
 	    class, price, taxlv, bz, note)
-	values (@phdtid, @sodfid, @shpfid, @fukfid, @riqi, 
+	values (@phdtid, @sodfid, @shpfid, @fukfid, @riqi,
 	    @class, @price, @taxlv, @bz, @note)
 go

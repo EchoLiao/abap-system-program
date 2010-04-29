@@ -79,3 +79,60 @@ if exists(select name from sysobjects where name='ins_kptt' and type='p')
 -- 发票类型
 -- 货币币种
 -- 开票
+
+create procedure ins_zhhz -- 账户组
+create procedure ins_zhsy -- 账户声誉
+create procedure ins_zhtt -- 账户
+create procedure ins_khtt -- 客户
+create procedure ins_qxtt -- 权限
+create procedure ins_zytt -- 职员
+create procedure ins_prod -- 产品
+create procedure ins_xsxz -- 销售小组
+create procedure ins_xxzc -- 销售小组成员组成
+create procedure ins_xsbg -- 销售办公室
+create procedure ins_xbzc -- 销售办公室组成
+create procedure ins_fxqd -- 分销渠道
+create procedure ins_xsfw -- 销售范围
+create procedure ins_htlx -- 合同类型
+create procedure ins_dhdt -- 订货单
+create procedure ins_qdht -- 签订合同
+create procedure ins_dhxx -- 订单信息
+create procedure ins_cktt -- 仓库
+create procedure ins_kctt -- 库存
+create procedure ins_phdt -- 配货单
+create procedure ins_phtt -- 配货
+create procedure ins_ysgj -- 运输工具
+create procedure ins_ysbh -- 运输编号
+create procedure ins_ship -- 发货
+create procedure ins_fplx -- 发票类型
+create procedure ins_hbbz -- 货币币种
+create procedure ins_kptt -- 开票
+
+
+yzhhz
+yzhsy
+yzhtt
+ykhtt
+yqxtt
+yzytt
+yprod
+yxsxz
+yxxzc
+yxsbg
+yxbzc
+yfxqd
+yxsfw
+yhtlx
+ydhdt
+yqdht
+ydhxx
+ycktt
+ykctt
+yphdt
+yphtt
+ysgj
+ysbh
+yship
+yfplx
+yhbbz
+ykptt
