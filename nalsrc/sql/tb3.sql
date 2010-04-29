@@ -56,7 +56,7 @@ if exists(select name from sysobjects where name='zhhz' and type='U')
 
 create table zhhz -- 账户组
 (
- id char(9) not null,
+ id char(3) not null,
  cha char(10) not null,
  note char(100),
  constraint zhhz_pk primary key (id),
@@ -75,7 +75,7 @@ create table zhtt -- 账户
  name char(20) not null,
  tel char(15) not null,
  addr char(100) not null,
- zhhzid char(9) not null,
+ zhhzid char(3) not null,
  zhsyid char(3) not null,
  constraint zhtt_pk primary key (id),
  constraint zhtt_zhhzid_fk foreign key (zhhzid) references zhhz(id),
@@ -88,7 +88,7 @@ create table khtt -- 客户
  sodfid char(9) not null,
  shpfid char(9) not null,
  fukfid char(9) not null,
- constraint khtt_pk primary key (shdfid, sodfid, shpfid, fukfid),
+ constraint khtt_pk primary key (shdfid),
  constraint khtt_shdfid_fk foreign key (shdfid) references zhtt(id),
  constraint khtt_sodfid_fk foreign key (sodfid) references zhtt(id),
  constraint khtt_shpfid_fk foreign key (shpfid) references zhtt(id),
