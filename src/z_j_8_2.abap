@@ -1,70 +1,70 @@
-REPORT Z_J_8_2.
-" 8.2	自定义输出字段的 ALV 控件实例
-*ALV使用到的类库
-TYPE-POOLS: SLIS.
+report z_j_8_2.
+" 8.2	自定义输出字段的 alv 控件实例
+*alv使用到的类库
+type-pools: slis.
 *一列描述
-DATA WA_ALV_FIELD TYPE SLIS_FIELDCAT_ALV.
+data wa_alv_field type slis_fieldcat_alv.
 *列描述内表，列清单 
-DATA WA_ALV_FIELDCAT TYPE SLIS_T_FIELDCAT_ALV.
+data wa_alv_fieldcat type slis_t_fieldcat_alv.
 *定义内表
-DATA WA_SPFLI LIKE TABLE OF YZHHZ WITH HEADER LINE.
+data wa_spfli like table of yzhhz with header line.
 *内表赋值
-SELECT * INTO TABLE WA_SPFLI FROM YZHHZ. 
+select * into table wa_spfli from yzhhz. 
 
 *定义第1到第3个字段
-WA_ALV_FIELD-COL_POS = 1. " 第几列? 
-WA_ALV_FIELD-FIELDNAME = 'ID'.
-WA_ALV_FIELD-SELTEXT_M = 'ID-NUMBER'.
-APPEND WA_ALV_FIELD TO WA_ALV_FIELDCAT.
+wa_alv_field-col_pos = 1. " 第几列? 
+wa_alv_field-fieldname = 'id'.
+wa_alv_field-seltext_m = 'id-number'.
+append wa_alv_field to wa_alv_fieldcat.
 
-WA_ALV_FIELD-COL_POS = 2.
-WA_ALV_FIELD-FIELDNAME = 'CHA'.
-WA_ALV_FIELD-SELTEXT_M = 'NAME'.
-APPEND WA_ALV_FIELD TO WA_ALV_FIELDCAT.
+wa_alv_field-col_pos = 2.
+wa_alv_field-fieldname = 'cha'.
+wa_alv_field-seltext_m = 'name'.
+append wa_alv_field to wa_alv_fieldcat.
 
-WA_ALV_FIELD-COL_POS = 3.
-WA_ALV_FIELD-FIELDNAME = 'NOTE'.
-WA_ALV_FIELD-SELTEXT_M = 'NOTES'.
-APPEND WA_ALV_FIELD TO WA_ALV_FIELDCAT.
+wa_alv_field-col_pos = 3.
+wa_alv_field-fieldname = 'note'.
+wa_alv_field-seltext_m = 'notes'.
+append wa_alv_field to wa_alv_fieldcat.
 
-*调用ALV显示表单数据 
-CALL FUNCTION 'REUSE_ALV_LIST_DISPLAY'
- EXPORTING 
-*   I_INTERFACE_CHECK              = ' ' 
-*   I_BYPASSING_BUFFER             =
-*   I_BUFFER_ACTIVE                = ' ' 
-*   I_CALLBACK_PROGRAM             = ' ' 
-*   I_CALLBACK_PF_STATUS_SET       = ' ' 
-*   I_CALLBACK_USER_COMMAND        = ' ' 
-*   I_STRUCTURE_NAME               =
-*   IS_LAYOUT                      =
-    IT_FIELDCAT                    = WA_ALV_FIELDCAT
-*   IT_EXCLUDING                   =
-*   IT_SPECIAL_GROUPS              =
-*   IT_SORT                        =
-*   IT_FILTER                      =
-*   IS_SEL_HIDE                    =
-*   I_DEFAULT                      = 'X' 
-*   I_SAVE                         = ' ' 
-*   IS_VARIANT                     =
-*   IT_EVENTS                      =
-*   IT_EVENT_EXIT                  =
-*   IS_PRINT                       =
-*   IS_REPREP_ID                   =
-*   I_SCREEN_START_COLUMN          = 0
-*   I_SCREEN_START_LINE            = 0
-*   I_SCREEN_END_COLUMN            = 0
-*   I_SCREEN_END_LINE              = 0
-* IMPORTING
-*   E_EXIT_CAUSED_BY_CALLER        =
-*   ES_EXIT_CAUSED_BY_USER         =
- TABLES
-    T_OUTTAB                       = WA_SPFLI
- EXCEPTIONS
-    PROGRAM_ERROR                  = 1
-    OTHERS                         = 2.
+*调用alv显示表单数据 
+call function 'reuse_alv_list_display'
+ exporting 
+*   i_interface_check              = ' ' 
+*   i_bypassing_buffer             =
+*   i_buffer_active                = ' ' 
+*   i_callback_program             = ' ' 
+*   i_callback_pf_status_set       = ' ' 
+*   i_callback_user_command        = ' ' 
+*   i_structure_name               =
+*   is_layout                      =
+    it_fieldcat                    = wa_alv_fieldcat
+*   it_excluding                   =
+*   it_special_groups              =
+*   it_sort                        =
+*   it_filter                      =
+*   is_sel_hide                    =
+*   i_default                      = 'x' 
+*   i_save                         = ' ' 
+*   is_variant                     =
+*   it_events                      =
+*   it_event_exit                  =
+*   is_print                       =
+*   is_reprep_id                   =
+*   i_screen_start_column          = 0
+*   i_screen_start_line            = 0
+*   i_screen_end_column            = 0
+*   i_screen_end_line              = 0
+* importing
+*   e_exit_caused_by_caller        =
+*   es_exit_caused_by_user         =
+ tables
+    t_outtab                       = wa_spfli
+ exceptions
+    program_error                  = 1
+    others                         = 2.
 
-IF SY-SUBRC <> 0.
-* MESSAGE ID SY-MSGID TYPE SY-MSGTY NUMBER SY-MSGNO
-*         WITH SY-MSGV1 SY-MSGV2 SY-MSGV3 SY-MSGV4.
-ENDIF.
+if sy-subrc <> 0.
+* message id sy-msgid type sy-msgty number sy-msgno
+*         with sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+endif.
