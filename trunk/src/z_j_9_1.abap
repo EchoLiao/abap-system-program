@@ -13,9 +13,10 @@ data: node_table like table of mtreesnode, "node 节点表
 " data wa_spfli type table of spfli.
 
 *当双击时取得节点key值与节点文本值变量 
-data: nodekey(200) value 'nodekey', nodetext(200) value 'nodetext'.
+data: nodekey(200) value 'nodekey', " 变量名必须与控件同名!!!!! 
+	nodetext(200) value 'nodetext'.
 *定义对象, 定义对象的双击方法, 用于将该对象双击方法分配到树双击事件
-class lcl_application definition deferred.
+class lcl_application definition deferred. " 不要也是可以的. 
 
 *---------------------------------------------------------------------*
 *  对象定义
@@ -36,22 +37,24 @@ class lcl_application implementation.
     nodekey = node_key.
 *从节点内表中按关键字读取单个节点
     read table node_table with key node_key = node_key    into node1.
-    nodetext = node1-text.  "将节点文本在窗口中显示 " 不起作用啊 ????? 
+    nodetext = node1-text.  "将节点文本在窗口中显示
   endmethod.                    "handle_node_double_click
 endclass.                    "lcl_application implementation 
 
 *自定义定义对象实例 
 data: g_application type ref to lcl_application.
 start-of-selection.
-create object g_application. 
+	create object g_application. 
 
 * 直接调用窗口, 在窗口pbo分配双击对象
 call screen 100.
 
-module cancel input. 
-  leave program.
-endmodule.                    "cancel input
- 
+*&---------------------------------------------------------------------*
+" 此模块可以没有, 因为见 when 'EXIT' 语句 
+" module cancel input. 
+  " leave program.
+" endmodule.                    "cancel input
+*&---------------------------------------------------------------------*
 
 *&---------------------------------------------------------------------*
 *&      module  status_0100  output. * text
@@ -70,7 +73,7 @@ module user_command_0100 input.
   save_ok = ok_code. 
   clear ok_code.
   case save_ok.
-    when 'exit'.
+    when 'EXIT'. " EXIT必须为大写 
       leave program. 
   endcase. 
 endmodule.                 " user_command_0100  input

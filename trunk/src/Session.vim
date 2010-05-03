@@ -25,8 +25,8 @@ nmap <silent>  :exe "C c"
 noremap  
 nmap <silent>  :exe "C n"
 noremap  :close
-vnoremap  :update
 nnoremap  :update
+vnoremap  :update
 onoremap  :update
 nmap  :pwd
 nmap  "+gP
@@ -41,11 +41,7 @@ nmap t :cs find t =expand("<cword>")
 nmap c :cs find c =expand("<cword>")
 nmap g :cs find g =expand("<cword>")
 nmap s :cs find s =expand("<cword>")
-vmap <silent> ,dep mzomyo:s/  *$//ge`zV`y:s/^	*$//ge
-map <silent> ,ct $F l,c$k$2F l
 nmap <silent> ,dep :%s/  *$//ge:%s/^	*$//ge
-omap <silent> ,dep :%s/  *$//ge:%s/^	*$//ge
-map <silent> ,gu mzggVG~`z
 map ,mbt <Plug>TMiniBufExplorer
 map ,mbu <Plug>UMiniBufExplorer
 map ,mbc <Plug>CMiniBufExplorer
@@ -113,6 +109,8 @@ map <silent> ,col :%s/^//n
 map <silent> ,cow :%s/\i\+/&/gn
 map <silent> ,coc :%s/./&/gn
 map <silent> ,anu :%s/^/\=line(".")." "/g
+vmap <silent> ,dep mzomyo:s/  *$//ge`zV`y:s/^	*$//ge
+omap <silent> ,dep :%s/  *$//ge:%s/^	*$//ge
 map <silent> ,dsp :g/^$/d
 map <silent> ,sor :!sort
 map <silent> ,sfl :.,/^$/-1!sort
@@ -143,6 +141,7 @@ map <silent> ,pwd :pwd
 map <silent> ,s2t :%s/	/    /g
 map <silent> ,d2s mz:%s/£¬/, /ge:%s/¡£/. /ge:%s/£»/; /ge:%s/£º/: /ge:%s/¡¡/  /ge:%s/¡°/"/ge:%s/¡±/"/ge:%s/£¿/?/ge:%s/£¡/!/ge:%s/¡¢/./ge:%s/£©/)/ge:%s/£¨/(/ge:%s/¡­/.../ge:%s/£½/=/ge:%s/£¯/\//ge:%s/£ª/\*/ge:%s/¡ª/-/ge:%s/££/#/ge:%s/¡Ã/:/ge:%s/£­/-/ge`z
 map <silent> ,sq qz"apjjf"mzggjlv$hy`zpjqi
+map <silent> ,gu mzggVG~`z
 nmap ,cw :cw 10 :cn
 nmap ,cp :cp
 nmap ,cn :cn
@@ -159,6 +158,7 @@ map <silent> ,jlt :set tags
 map <silent> ,cah :CalendarH
 map <silent> ,stc :call ToggleSketch()
 map <silent> ,cis :source $VIM/vimfiles/syntax/txt.vim
+map <silent> ,ct $F l,c$k$2F l
 map <silent> ,ccs :.,.s/ //g
 map <silent> ,cca ,cak
 map <silent> ,ccc ,cck
@@ -201,15 +201,9 @@ map Q gq
 nmap gx <Plug>NetrwBrowseX
 map <silent> mm <Plug>Vm_toggle_sign 
 vnoremap p :let current_reg = @"gvs=current_reg
-onoremap <C-F4> c
-onoremap <C-Tab> w
-vmap <S-Insert> 
-nnoremap <C-F4> c
-vnoremap <C-F4> c
-nnoremap <C-Tab> w
-vnoremap <C-Tab> w
 nmap <S-Insert> "+gP
-omap <S-Insert> "+gP
+nnoremap <C-Tab> w
+nnoremap <C-F4> c
 map <S-F2> <Plug>Vm_goto_prev_sign
 map <F2> <Plug>Vm_goto_next_sign
 map <C-F2> <Plug>Vm_toggle_sign
@@ -256,9 +250,14 @@ vnoremap <silent> <Plug>NERDCommenterToggle :call NERDComment(1, "toggle")
 nnoremap <silent> <Plug>NERDCommenterToggle :call NERDComment(0, "toggle")
 vnoremap <silent> <Plug>NERDCommenterComment :call NERDComment(1, "norm")
 nnoremap <silent> <Plug>NERDCommenterComment :call NERDComment(0, "norm")
+onoremap <C-F4> c
+vnoremap <C-F4> c
+onoremap <C-Tab> w
+vnoremap <C-Tab> w
 noremap <M-C-X> 
 noremap <M-C-A> 
 noremap <M-Space> :simalt ~
+vmap <S-Insert> 
 map <F6> :tabnext
 map <F5> :tabprevious
 map <F4> :tabnew
@@ -269,6 +268,7 @@ map <F8> :exe "Cclear " expand("%") ":" . line(".")
 vmap <C-Del> "*d
 vnoremap <S-Del> "+x
 vnoremap <C-Insert> "+y
+omap <S-Insert> "+gP
 inoremap  gggHG
 inoremap  :update
 inoremap  u
@@ -317,28 +317,28 @@ set backspace=indent,eol,start
 set balloonexpr=BalloonDeclaration()
 set browsedir=buffer
 set cindent
-set completeopt=longest,menuone
+set completeopt=longest
 set cscopetag
 set cscopetagorder=1
 set cscopeverbose
 set noequalalways
 set fileencodings=utf-8,chinese
+set formatoptions=tcqMm
 set guioptions=egt
 set helplang=Ch
 set hlsearch
 set incsearch
 set linespace=2
 set matchtime=7
-set nomodeline
 set omnifunc=omni#cpp#complete#Main
 set ruler
 set scrolloff=2
-set shiftwidth=4
+set shiftwidth=2
 set showmatch
 set smartindent
 set softtabstop=4
 set statusline=%f%m%r,%Y,%{&fileformat}\ \ \ ASCII=%b,HEX=%B\ \ \ %l,%c%V\ %p%%\ \ \ [%L\ lines]
-set tabstop=2
+set tabstop=4
 set tags=./tags,tags,./tags,./../tags,./../../tags,./../../../tags,./**/tags,tags,E:\\lang\\cpp\\cpp\\cpp_src\\tags,E:\\lang\\win32\\mfc\\tags,E:\\lang\\win32\\winapi\\tags,C:\\project\\orge\\OgreSDK\\orge_main_src\\tags,E:\\liaocaiyuan\\destop\\ogre\\ogre2\\include\\orz\\tags,C:\\project\\orge\\OgreSDK\\include\\tags
 set title
 set updatetime=500
@@ -355,23 +355,29 @@ endif
 set shortmess=aoO
 badd +9 new\note.txt
 badd +8 z_j_6_6.abap
-badd +19 z_j_8_1.abap
+badd +1 z_j_8_1.abap
 badd +20 z_j_8_2.abap
 badd +1 new\z_j_9_1.abap
 badd +2 z_j_6_4_3_scren.abap
 badd +6 new\z_j_9_1_s.abap
 badd +1 z_j_6_4_3_o.abap
-badd +9 z_j_6_4_3.abap
-badd +1 z_j_9_1.abap
-badd +11 z_j_9_1_s.abap
+badd +16 z_j_6_4_3.abap
+badd +60 z_j_9_1.abap
+badd +1 z_j_9_1_s.abap
 badd +5 message.txt
-badd +1 ~\_vimrc
-badd +1 C:\Users\liaocaiyuan\AppData\Local\Temp\z_j_9_2.abap
+badd +189 ~\_vimrc
+badd +186 C:\Users\liaocaiyuan\AppData\Local\Temp\z_j_9_2.abap
 badd +106 z_j_6_5_3.abap
-badd +0 z_j_6_5.abap
+badd +1 z_j_6_5.abap
 badd +30 z_j_6_5_3_scren.abap
+badd +12 z_j_9_2.abap
+badd +11 z_j_9_2_s.abap
+badd +348 z_j_9_3.abap
+badd +2 z_j_6_4.abap
+badd +5 z_j_6_3.abap
+badd +12 z_j_9_3_s.abap
 silent! argdel *
-edit z_j_9_1_s.abap
+edit z_j_9_2_s.abap
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -380,7 +386,10 @@ wincmd _ | wincmd |
 split
 wincmd _ | wincmd |
 split
-2wincmd k
+wincmd _ | wincmd |
+split
+3wincmd k
+wincmd w
 wincmd w
 wincmd w
 wincmd w
@@ -392,122 +401,20 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 3 + 23) / 46)
-exe 'vert 1resize ' . ((&columns * 89 + 89) / 179)
-exe '2resize ' . ((&lines * 6 + 23) / 46)
-exe 'vert 2resize ' . ((&columns * 89 + 89) / 179)
-exe '3resize ' . ((&lines * 33 + 23) / 46)
-exe 'vert 3resize ' . ((&columns * 89 + 89) / 179)
-exe '4resize ' . ((&lines * 22 + 23) / 46)
-exe 'vert 4resize ' . ((&columns * 89 + 89) / 179)
-exe '5resize ' . ((&lines * 21 + 23) / 46)
-exe 'vert 5resize ' . ((&columns * 89 + 89) / 179)
+exe '1resize ' . ((&lines * 6 + 23) / 46)
+exe 'vert 1resize ' . ((&columns * 104 + 89) / 179)
+exe '2resize ' . ((&lines * 11 + 23) / 46)
+exe 'vert 2resize ' . ((&columns * 104 + 89) / 179)
+exe '3resize ' . ((&lines * 13 + 23) / 46)
+exe 'vert 3resize ' . ((&columns * 104 + 89) / 179)
+exe '4resize ' . ((&lines * 11 + 23) / 46)
+exe 'vert 4resize ' . ((&columns * 104 + 89) / 179)
+exe '5resize ' . ((&lines * 19 + 23) / 46)
+exe 'vert 5resize ' . ((&columns * 74 + 89) / 179)
+exe '6resize ' . ((&lines * 24 + 23) / 46)
+exe 'vert 6resize ' . ((&columns * 74 + 89) / 179)
 argglobal
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal nocopyindent
-setlocal nocursorcolumn
-set cursorline
-setlocal cursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal noexpandtab
-if &filetype != 'abap'
-setlocal filetype=abap
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=-,48-57,_,A-Z,a-z
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal nomodeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=omni#cpp#complete#Main
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal smartindent
-setlocal softtabstop=4
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'abap'
-setlocal syntax=abap
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 11 - ((2 * winheight(0) + 1) / 3)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-11
-normal! 0
-wincmd w
-argglobal
-edit C:\Users\liaocaiyuan\AppData\Local\Temp\z_j_9_2.abap
+inoremap <buffer> 	 =CodeComplete()=SwitchRegion()
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -604,15 +511,333 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 3) / 6)
+let s:l = 11 - ((5 * winheight(0) + 3) / 6)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+11
+normal! 0
+wincmd w
+argglobal
+edit z_j_9_3_s.abap
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal noexpandtab
+if &filetype != 'abap'
+setlocal filetype=abap
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=-,48-57,_,A-Z,a-z
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=omni#cpp#complete#Main
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'abap'
+setlocal syntax=abap
+endif
+setlocal tabstop=4
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 12 - ((10 * winheight(0) + 5) / 11)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+12
+normal! 0
+wincmd w
+argglobal
+edit z_j_9_3.abap
+inoremap <buffer> 	 =CodeComplete()=SwitchRegion()
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=javacomplete#CompleteParamsInfo
+setlocal nocopyindent
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal noexpandtab
+if &filetype != 'abap'
+setlocal filetype=abap
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcqMm
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=-,48-57,_,A-Z,a-z
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=omni#cpp#complete#Main
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'abap'
+setlocal syntax=abap
+endif
+setlocal tabstop=4
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 348 - ((7 * winheight(0) + 6) / 13)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+348
 normal! 0
 wincmd w
 argglobal
 edit z_j_9_1.abap
+inoremap <buffer> 	 =CodeComplete()=SwitchRegion()
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal cindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal completefunc=
+setlocal nocopyindent
+setlocal nocursorcolumn
+set cursorline
+setlocal cursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal noexpandtab
+if &filetype != 'abap'
+setlocal filetype=abap
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=tcq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=-,48-57,_,A-Z,a-z
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal nomodeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=omni#cpp#complete#Main
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != 'abap'
+setlocal syntax=abap
+endif
+setlocal tabstop=4
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 60 - ((8 * winheight(0) + 5) / 11)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+60
+normal! 029l
+wincmd w
+argglobal
+edit z_j_8_1.abap
+inoremap <buffer> 	 =CodeComplete()=SwitchRegion()
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -709,117 +934,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 16) / 33)
+let s:l = 1 - ((0 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
-wincmd w
-argglobal
-edit z_j_8_1.abap
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal balloonexpr=
-setlocal nobinary
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal nocopyindent
-setlocal nocursorcolumn
-set cursorline
-setlocal cursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal noexpandtab
-if &filetype != 'abap'
-setlocal filetype=abap
-endif
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=-,48-57,_,A-Z,a-z
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal nolist
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal nomodeline
-setlocal modifiable
-setlocal nrformats=octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=omni#cpp#complete#Main
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal noscrollbind
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal smartindent
-setlocal softtabstop=4
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'abap'
-setlocal syntax=abap
-endif
-setlocal tabstop=4
-setlocal tags=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 19 - ((18 * winheight(0) + 11) / 22)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-19
-normal! 015l
 wincmd w
 argglobal
 edit z_j_6_6.abap
@@ -920,7 +1040,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((7 * winheight(0) + 10) / 21)
+let s:l = 8 - ((7 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -928,16 +1048,18 @@ normal! zt
 normal! 0
 wincmd w
 3wincmd w
-exe '1resize ' . ((&lines * 3 + 23) / 46)
-exe 'vert 1resize ' . ((&columns * 89 + 89) / 179)
-exe '2resize ' . ((&lines * 6 + 23) / 46)
-exe 'vert 2resize ' . ((&columns * 89 + 89) / 179)
-exe '3resize ' . ((&lines * 33 + 23) / 46)
-exe 'vert 3resize ' . ((&columns * 89 + 89) / 179)
-exe '4resize ' . ((&lines * 22 + 23) / 46)
-exe 'vert 4resize ' . ((&columns * 89 + 89) / 179)
-exe '5resize ' . ((&lines * 21 + 23) / 46)
-exe 'vert 5resize ' . ((&columns * 89 + 89) / 179)
+exe '1resize ' . ((&lines * 6 + 23) / 46)
+exe 'vert 1resize ' . ((&columns * 104 + 89) / 179)
+exe '2resize ' . ((&lines * 11 + 23) / 46)
+exe 'vert 2resize ' . ((&columns * 104 + 89) / 179)
+exe '3resize ' . ((&lines * 13 + 23) / 46)
+exe 'vert 3resize ' . ((&columns * 104 + 89) / 179)
+exe '4resize ' . ((&lines * 11 + 23) / 46)
+exe 'vert 4resize ' . ((&columns * 104 + 89) / 179)
+exe '5resize ' . ((&lines * 19 + 23) / 46)
+exe 'vert 5resize ' . ((&columns * 74 + 89) / 179)
+exe '6resize ' . ((&lines * 24 + 23) / 46)
+exe 'vert 6resize ' . ((&columns * 74 + 89) / 179)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
