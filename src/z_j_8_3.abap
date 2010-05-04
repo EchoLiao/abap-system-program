@@ -3,9 +3,9 @@ report z_j_8_3.
 data: ok_code type sy-ucomm,
       save_ok type sy-ucomm.
 *定义内表，变量需要传递，不加header line
-data wa_spfli type table of yzhhz .
+data wa_spfli type table of spfli .
 *内表赋值
-select * into table wa_spfli from yzhhz. 
+select * into table wa_spfli from spfli. 
 * ALVDATA 是屏幕100中定义控制控件的名称 
 data: wa_container type scrfname value 'ALVDATA',
       alv_grid type ref to cl_gui_alv_grid,
@@ -25,7 +25,7 @@ module status_0100 output.
     create object alv_grid
       exporting i_parent = wa_custom_container.
     call method alv_grid->set_table_for_first_display
-      exporting i_structure_name = 'yzhhz' " 表名 
+      exporting i_structure_name = 'spfli' " 表名 
       changing it_outtab        = wa_spfli.
   endif.
 endmodule.                 " status_0100  output
