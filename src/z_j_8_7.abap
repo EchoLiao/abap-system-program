@@ -1,116 +1,116 @@
-report z_j_8_7.
-" 8.7 ALV Tree 的使用
-data: ok_code type sy-ucomm,
-      save_ok type sy-ucomm.
-data: gb_fieldcat type lvc_t_fcat.
-data: gb_sortfld type lvc_t_sort.
-data wa_spfli type table of spfli.
-select * into table wa_spfli from spfli. 
+REPORT Z_J_8_7.
+" 8.7 ALV TREE 的使用
+DATA: OK_CODE TYPE SY-UCOMM,
+      SAVE_OK TYPE SY-UCOMM.
+DATA: GB_FIELDCAT TYPE LVC_T_FCAT.
+DATA: GB_SORTFLD TYPE LVC_T_SORT.
+DATA WA_SPFLI TYPE TABLE OF SPFLI.
+SELECT * INTO TABLE WA_SPFLI FROM SPFLI.
 
-data: wa_container type scrfname value 'ALVDATA',
-      alv_grid type ref to cl_gui_alv_tree_simple, 
-      wa_custom_container type ref to cl_gui_custom_container.
+DATA: WA_CONTAINER TYPE SCRFNAME VALUE 'ALVDATA',
+      ALV_GRID TYPE REF TO CL_GUI_ALV_TREE_SIMPLE,  " not cl_gui_alv_grid!
+      WA_CUSTOM_CONTAINER TYPE REF TO CL_GUI_CUSTOM_CONTAINER.
 
-call screen 100.
-
-
-*&---------------------------------------------------------------------*
-*&      module  status_0100  output *       text
-*----------------------------------------------------------------------*
-module status_0100 output.
-  " set pf-status 'status1'.
-  if wa_custom_container is initial.
-    data ls_list_comm type slis_t_listheader.
-    data ls_alist_comm type slis_listheader.
-    ls_alist_comm-typ = 'H'.
-    ls_alist_comm-info = 'my alv tree testing'.
-    append ls_alist_comm to ls_list_comm.
-
-    perform bldcat.
-    perform bldsortfld.
-
-    create object wa_custom_container
-      exporting container_name = wa_container.
-    create object alv_grid
-      exporting i_parent = wa_custom_container.
-    call method alv_grid->set_table_for_first_display
-      exporting
-        it_list_commentary = ls_list_comm
-        i_structure_name   = 'spfli'
-      changing
-        it_sort            = gb_sortfld
-        it_fieldcatalog    = gb_fieldcat 
-        it_outtab          = wa_spfli.
-    call method alv_grid->expand_tree
-      exporting i_level = 1. 
-  endif.
-endmodule.                 " status_0100  output
+CALL SCREEN 100.
 
 
 *&---------------------------------------------------------------------*
-*&      module  user_command_0100  input *       text
+*&      MODULE  STATUS_0100  OUTPUT *       TEXT
 *----------------------------------------------------------------------*
-module user_command_0100 input.
-  save_ok = ok_code. 
-  clear ok_code.
-  case save_ok.
-    when 'EXIT'.
-      leave program. 
-  endcase. 
-endmodule.                 " user_command_0100  input
+MODULE STATUS_0100 OUTPUT.
+  " SET PF-STATUS 'STATUS1'.
+  IF WA_CUSTOM_CONTAINER IS INITIAL.
+    DATA LS_LIST_COMM TYPE SLIS_T_LISTHEADER.
+    DATA LS_ALIST_COMM TYPE SLIS_LISTHEADER.
+    LS_ALIST_COMM-TYP = 'H'.
+    LS_ALIST_COMM-INFO = 'MY ALV TREE TESTING'.
+    APPEND LS_ALIST_COMM TO LS_LIST_COMM.
+
+    PERFORM BLDCAT.
+    PERFORM BLDSORTFLD.
+
+    CREATE OBJECT WA_CUSTOM_CONTAINER
+      EXPORTING CONTAINER_NAME = WA_CONTAINER.
+    CREATE OBJECT ALV_GRID
+      EXPORTING I_PARENT = WA_CUSTOM_CONTAINER.
+    CALL METHOD ALV_GRID->SET_TABLE_FOR_FIRST_DISPLAY
+      EXPORTING
+        IT_LIST_COMMENTARY = LS_LIST_COMM
+        I_STRUCTURE_NAME   = 'SPFLI'
+      CHANGING
+        IT_SORT            = GB_SORTFLD
+        IT_FIELDCATALOG    = GB_FIELDCAT
+        IT_OUTTAB          = WA_SPFLI.
+    CALL METHOD ALV_GRID->EXPAND_TREE
+      EXPORTING I_LEVEL = 1.
+  ENDIF.
+ENDMODULE.                 " STATUS_0100  OUTPUT
 
 
 *&---------------------------------------------------------------------*
-*&      form  bldcat *       text
+*&      MODULE  USER_COMMAND_0100  INPUT *       TEXT
 *----------------------------------------------------------------------*
-*  -->  p1        text
-*  <--  p2        text
-*----------------------------------------------------------------------*
-form bldcat .
-  call function 'LVC_FIELDCATALOG_MERGE' 
-    exporting i_structure_name = 'spfli'
-    changing ct_fieldcat      = gb_fieldcat.
+MODULE USER_COMMAND_0100 INPUT.
+  SAVE_OK = OK_CODE.
+  CLEAR OK_CODE.
+  CASE SAVE_OK.
+    WHEN 'EXIT'.
+      LEAVE PROGRAM.
+  ENDCASE.
+ENDMODULE.                 " USER_COMMAND_0100  INPUT
 
-  data ls_fldcat type lvc_s_fcat.
-  loop at gb_fieldcat into ls_fldcat.
-    case LS_FLDCAT-FIELDNAME.
-      when 'countryfr' or 'cityfrom' or 'countryto'
-           or 'cityto' or 'distance'.
-        ls_fldcat-outputlen = 15.
-      when others.
-        ls_fldcat-no_out = 'x'.
-    endcase.
-    if ls_fldcat-fieldname = 'distance'. 
-      ls_fldcat-do_sum = 'x'.
-    endif. 
-    modify gb_fieldcat from ls_fldcat.
-  endloop. 
-endform.                    " bldcat
- 
- 
+
 *&---------------------------------------------------------------------*
-*&      form  bldsortfld *       text
+*&      FORM  BLDCAT *       TEXT
 *----------------------------------------------------------------------*
-*  -->  p1        text
-*  <--  p2        text
+*  -->  P1        TEXT
+*  <--  P2        TEXT
 *----------------------------------------------------------------------*
-form bldsortfld .
-  data ls_sortfld type lvc_s_sort.
-  ls_sortfld-spos = 1.
-  ls_sortfld-fieldname = 'countryfr'.
-  ls_sortfld-up = 'x'.
-  ls_sortfld-subtot = 'x'.
-  append ls_sortfld to gb_sortfld.
+FORM BLDCAT.
+  CALL FUNCTION 'LVC_FIELDCATALOG_MERGE'
+    EXPORTING I_STRUCTURE_NAME = 'SPFLI'
+    CHANGING CT_FIELDCAT      = GB_FIELDCAT.
 
-  ls_sortfld-spos = 2.
-  ls_sortfld-fieldname = 'carrid'.
-  ls_sortfld-up = 'x'.
-  ls_sortfld-subtot = 'x'.
-  append ls_sortfld to gb_sortfld.
+  DATA LS_FLDCAT TYPE LVC_S_FCAT.
+  LOOP AT GB_FIELDCAT INTO LS_FLDCAT.
+    CASE LS_FLDCAT-FIELDNAME.
+      WHEN 'COUNTRYFR' OR 'CITYFROM' OR 'COUNTRYTO'
+           OR 'CITYTO' OR 'DISTANCE'.
+        LS_FLDCAT-OUTPUTLEN = 15.
+      WHEN OTHERS.
+        LS_FLDCAT-NO_OUT = 'X'.
+    ENDCASE.
+    IF LS_FLDCAT-FIELDNAME = 'DISTANCE'.
+      LS_FLDCAT-DO_SUM = 'X'. " 计算总距离 
+    ENDIF.
+    MODIFY GB_FIELDCAT FROM LS_FLDCAT.
+  ENDLOOP.
+ENDFORM.                    " BLDCAT
 
-  ls_sortfld-spos = 3.
-  ls_sortfld-fieldname = 'connid'.
-  ls_sortfld-up = 'x'.
-  ls_sortfld-subtot = 'x'.
-  append ls_sortfld to gb_sortfld.
-endform.                    " bldsortfld 
+
+*&---------------------------------------------------------------------*
+*&      FORM  BLDSORTFLD *       TEXT
+*----------------------------------------------------------------------*
+*  -->  P1        TEXT
+*  <--  P2        TEXT
+*----------------------------------------------------------------------*
+FORM BLDSORTFLD . " 层次关系 
+  DATA LS_SORTFLD TYPE LVC_S_SORT.
+  LS_SORTFLD-SPOS = 1.
+  LS_SORTFLD-FIELDNAME = 'COUNTRYFR'. " 国家 
+  LS_SORTFLD-UP = 'X'.
+  LS_SORTFLD-SUBTOT = 'X'.
+  APPEND LS_SORTFLD TO GB_SORTFLD.
+
+  LS_SORTFLD-SPOS = 2.
+  LS_SORTFLD-FIELDNAME = 'CARRID'. " 航线 
+  LS_SORTFLD-UP = 'X'.
+  LS_SORTFLD-SUBTOT = 'X'.
+  APPEND LS_SORTFLD TO GB_SORTFLD.
+
+  LS_SORTFLD-SPOS = 3.
+  LS_SORTFLD-FIELDNAME = 'CONNID'. " 航班 
+  LS_SORTFLD-UP = 'X'.
+  LS_SORTFLD-SUBTOT = 'X'.
+  APPEND LS_SORTFLD TO GB_SORTFLD.
+ENDFORM.                    " BLDSORTFLD
