@@ -1,63 +1,50 @@
-SAP R/3 æŠ€æœ¯ä¸å®ç°
+7. abap
+7.1 blog
+SAP R/3 ¼¼ÊõÓëÊµÏÖ
 http://www.ithome-cn.net/book/sapr3book.htm
 
-å…å®‰è£…Oracleå®¢æˆ·ç«¯ä½¿ç”¨PL/SQLè¿æ¥Oracle
+7.2 interview
+ABAP³£¼ûÃæÊÔÌâ¼°´ğ°¸(×ª)
+http://hi.baidu.com/supergukai/blog/item/17f9019575581740d1135e96.html
+
+
+Ãâ°²×°Oracle¿Í»§¶ËÊ¹ÓÃPL/SQLÁ¬½ÓOracle
 http://www.cnblogs.com/elegantok/archive/2008/11/13/1332794.html
-
-è¯·æ•™ä¸€ä¸ªç”¨ABAPè¿æ¥ä¸€ä¸ªå…¶ä»–æœåŠ¡å™¨æ•°æ®åº“çš„é—®é¢˜    
+Çë½ÌÒ»¸öÓÃABAPÁ¬½ÓÒ»¸öÆäËû·şÎñÆ÷Êı¾İ¿âµÄÎÊÌâ    
 http://forums.sdn.sap.com/message.jspa?messageID=7949213
-
-SAP ä¸­å›½
+SAP ÖĞ¹ú
 http://www.sap.com/china/index.epx
-
-ABAPç¼–ç¨‹ä»å…¥é—¨åˆ°ç²¾é€š 
+ABAP±à³Ì´ÓÈëÃÅµ½¾«Í¨ 
 http://tech.it168.com/focus/200907/SAPABAP090713/index.html
-
-è¯¦å°½çš„ABAPå¼€å‘èµ„æ–™_è½¯ä»¶ä¸‹è½½
+Ïê¾¡µÄABAP¿ª·¢×ÊÁÏ_Èí¼şÏÂÔØ
 http://download.pcpop.com/Soft/296392.html
-
-ABAP--å…³äºOO ABAPçš„å­¦ä¹ èµ„æ–™è¿æ¥åˆ—è¡¨
+ABAP--¹ØÓÚOO ABAPµÄÑ§Ï°×ÊÁÏÁ¬½ÓÁĞ±í
 http://silverw0396.javaeye.com/blog/229399
-
-éå¸¸å¥½çš„ABAPèµ„æ–™
+·Ç³£ºÃµÄABAP×ÊÁÏ
 http://www.itpub.net/thread-876107-2-6.html
-
-Abapç¼–ç¨‹æ‰‹å†Œ.
+Abap±à³ÌÊÖ²á.
 http://www.ceolib.com/downzl/215299.shtm
-
-ABAPä¾‹ç¨‹å¤§å…¨
+ABAPÀı³Ì´óÈ«
 http://www.45oa.com/soft/html/56.html
-
-çœ‹å®ä¾‹å­¦ä¹ ABAPé¢å‘å¯¹è±¡ç¼–ç¨‹
+¿´ÊµÀıÑ§Ï°ABAPÃæÏò¶ÔÏó±à³Ì
 http://tech.it168.com/a2009/0707/601/000000601910.shtml
-
-ABAPå¼€å‘å·¥å…·ä¸‹è½½ï¼Œå¼€å‘ç¯å¢ƒé…ç½®
+ABAP¿ª·¢¹¤¾ßÏÂÔØ, ¿ª·¢»·¾³ÅäÖÃ
 http://www.itpub.net/thread-1191617-1-1.html
-=======
-?Ï°×µ?ABAP???? 
+????ABAP???? 
 http://blog.chinaunix.net/u1/40527/article_58058.html
-
-
-?â²¿???İ¿???Á¬?Ó´?Ê¾????Tcode??DBCO?? by Ç¿ ??
+?????????l????????Tcode??DBCO?? by ? ??
 http://scnblogs.techweb.com.cn/qiangsheng/
-
-SAP????DBCOÁ¬??Sql2000.????
+SAP????DBCOl??Sql2000.????
 http://ms.itpub.net/thread-1064402-1-12.html
-
-dbcoÁ¬??oracle???İ¿???????
+dbcol??oracle???????????
 http://blog.csdn.net/lvzhqi/archive/2009/07/31/4397166.aspx
-
-?â²¿???İ¿???Á¬?Ó´?Ê¾????Tcode??DBCO??
+?????????l????????Tcode??DBCO??
 http://vcpeter.blog.163.com/blog/static/50260206201032154924737/
-
-???Î´?SAP??Á¬?????????İ¿?
+ÈçºÎ´ÓSAPÖĞÁ¬½ÓÆäËûÊı¾İ¿â
 http://www.sapsky.com/html/2006-11/611.htm
-
-SAPÁ¬???â²¿ORACLE???İ¿?
+SAPl????ORACLE?????
 http://chenluizhong.blog.163.com/blog/static/4663926201002110161471/
-
- ???Î´?SAP??Á¬?????????İ¿?
+ ???¦Ä?SAP??l???????????
 http://blog.csdn.net/CompassButton/archive/2006/08/30/1144319.aspx
-
-??????ABAP?????????????İ¿â£¬??SQL Server
+??????ABAP?????????????????SQL Server
 http://www.erphome.net/wdb/wdbread.php?forumid=14&filename=f_1855

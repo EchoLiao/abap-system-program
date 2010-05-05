@@ -24,7 +24,7 @@ class lcl_event_receiver definition.
     data: ddel_rows type standard table of spfli.
     methods:
     handle_data_changed
-      for event data_changed of cl_gui_alv_grid
+      for event data_changed of cl_gui_alv_grid " Book: P199 
         importing er_data_changed.
     methods:
     update_delta_tables
