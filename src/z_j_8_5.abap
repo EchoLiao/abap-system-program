@@ -52,7 +52,7 @@ endclass.                    "lcl_event_receiver  implentation
 * 定义状态条、包括菜单、工具条按钮、系统按钮等
 *----------------------------------------------------------------------*
 module status_0100 output.
-  " set pf-status 'status1'. " ????? 
+  " set pf-status 'status1'.
 *如果窗口还没有创建alv对象则创建它
   if wa_custom_container is initial.
     create object wa_custom_container
