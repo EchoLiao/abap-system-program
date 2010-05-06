@@ -14,6 +14,7 @@ do 2 times.
 enddo.
 
 * ===================================================
+" 计算字符串长度的一种方法.
 data:   len type i,
         string(30) type c value 'beijing    2008'.
 while string ne space. " 当...不等于未尾时. 
@@ -24,7 +25,7 @@ endwhile.
 write: / 'len:', len.
 
 * ===================================================
-data:   s1(19) type c value 'first new old',
+data:   s1(109) type c value 'first new old;yes;no',
         s2(19) type c value 'second',
         s3(22) type c,
         sep(1) type c value '.'.
@@ -33,8 +34,8 @@ write: / s3.
 concatenate s1 s2 into s3 separated by sep. " 连接字符串 
 write: / s3.
 
-data: itab type table of string.
-split s1 at 's' into table itab. " 拆分存入表. 
+data: itab type table of String.
+split s1 at ';' into table itab. " 拆分存入表. 
 loop at itab into s1.
     write: / s1.
 endloop.
