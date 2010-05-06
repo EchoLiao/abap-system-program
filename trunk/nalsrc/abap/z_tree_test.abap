@@ -9,12 +9,13 @@ data: begin of ttree,
 	lv2 type tnode,
     end of ttree.
 data: tree_tab like table of ttree with header line.
-data: tree_lv0, tree_lv1, tree_lv2, tree_lv3 type String,
-    str_tree type String.
+data: tree_lv0 type String, tree_lv1 type String,
+	  tree_lv2 type String, tree_lv3 type String,
+      str_tree type String.
 data: strtab type table of String,
       strtab_tree type table of String,
       strtab_keytext type table of String.
-tree_lv0 = 'rt,飞机票订票系统,db,基础数据,scarr,航线信息.' & " 关键字不能长于12个字符!!!!! 
+tree_lv0 = 'rt,sssss,db,基础数据,scarr,航线信息.' & " 关键字不能长于12个字符!!!!! 
 	   'rt,飞机票订票系统,db,基础数据,scounter,售票柜台信息.' &
 	   'rt,飞机票订票系统,db,基础数据,spfli,航班信息.' &
 	   'rt,飞机票订票系统,db,基础数据,sflight,具体班次信息.' &
@@ -30,9 +31,10 @@ tree_lv2 = 'rt,飞机票订票系统,hq,行情,leave,去程.' &
 tree_lv3 = 'rt,飞机票订票系统,ggb,公告板,hkgstjp,航空公司特价票.' &
 	   'rt,飞机票订票系统,ggb,公告板,cstjp,城市特价票.' &
 	   '' .
-
-split tree_lv0 at '@' into table strtab.
-" append tree_lv0 to strtab.
+append tree_lv0 to strtab.
+append tree_lv1 to strtab.
+append tree_lv2 to strtab.
+append tree_lv3 to strtab.
 
 loop at strtab into tree_lv0.
     split tree_lv0 at '.' into table strtab_tree.
@@ -62,9 +64,9 @@ data: wa_container type scrfname value 'TREE',
 data: node_table like table of mtreesnode,
       node1 type mtreesnode.
 data wa_spfli type table of ttree with header line.
-data wa_sflight type table of sflight.
+data wa_sflight type table of YZHHZ.
 data: NODEKEY(200) value 'node',
-      NODETEXT(200) value 'node'.
+      NODETEXT(200) value 'text'.
 class lcl_application definition deferred.
 data event_receiver type ref to lcl_application.
 
@@ -87,13 +89,11 @@ class lcl_application implementation.
     read table node_table with key node_key = node_key into node1.
     NODETEXT = node1-text.
     clear wa_sflight.
-    select * into table wa_sflight from sflight
-        where carrid = node1-node_key+2(2)
-          and connid = node1-node_key+4(4).
+    select * into table wa_sflight from YZHHZ.
 *    create object wa_alv
 *        exporting i_parent = wa_custom_container. 
     call method wa_alv->set_table_for_first_display
-      exporting i_structure_name = 'sflight'
+      exporting i_structure_name = 'YZHHZ'
       changing  it_outtab        = wa_sflight.
   endmethod.                    "handle_node_double_click
 endclass.                    "lcl_application implementation 
@@ -155,8 +155,6 @@ form create_tree .
       parent = wa_custom_container
       node_selection_mode = cl_gui_simple_tree=>node_sel_mode_single.
   if sy-subrc <> 0.
-* message id sy-msgid type sy-msgty number sy-msgno
-*         with sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
   endif.
 
   data: countryfr like ttree-lv0-key, carrid like ttree-lv1-key.
@@ -180,40 +178,41 @@ form create_tree .
       node1-text = ttree-lv0-text.
       append node1 to node_table.
     endif. 
-
-    if ( countryfr ne ttree-lv0-key ) or ( carrid <> ttree-lv1-key ).
-      clear node1.
-      concatenate ttree-lv0-key ttree-lv1-key into node1-node_key. 
+	
+	if ( countryfr ne ttree-lv0-key ) 
+		or ( carrid <> ttree-lv1-key ).
+	  clear node1.
+	  concatenate ttree-lv0-key ttree-lv1-key into node1-node_key. 
 *上层关系
-      node1-relatkey = ttree-lv0-key.
-      node1-relatship = cl_gui_simple_tree=>relat_last_child.
-      node1-hidden = ''.
-      node1-disabled = ''.
-      node1-isfolder = 'x'.
-      clear node1-n_image.
-      clear node1-exp_image.
-      clear node1-expander.
+	  node1-relatkey = ttree-lv0-key.
+	  node1-relatship = cl_gui_simple_tree=>relat_last_child.
+	  node1-hidden = ''.
+	  node1-disabled = ''.
+	  node1-isfolder = 'x'.
+	  node1-n_image = '@G3@'.
+	  node1-exp_image = '@G3@'.
+	  clear node1-expander.
 *节点显示carrid
-      node1-text = ttree-lv1-text.
-      append node1 to node_table.
-    endif. 
+	  node1-text = ttree-lv1-text.
+	  append node1 to node_table.
+	endif. 
 
-    countryfr = ttree-lv0-key. " 意义见 if 语句!!!
-    carrid = ttree-lv1-key.
-    clear node1.
-    concatenate ttree-lv0-key ttree-lv1-key 
+	countryfr = ttree-lv0-key. " 意义见 if 语句!!!
+	carrid = ttree-lv1-key.
+	clear node1.
+	concatenate ttree-lv0-key ttree-lv1-key 
 	 ttree-lv2-key into node1-node_key.
-    concatenate ttree-lv0-key ttree-lv1-key into str1. 
-    node1-relatkey = str1.
-    node1-relatship = cl_gui_simple_tree=>relat_last_child.
-    node1-hidden = ''.
-    node1-disabled = ''.
-    node1-isfolder = 'x'.
-    node1-n_image = '@5B@'.
-    node1-exp_image = '@5B@'.
-    clear node1-expander.
-    node1-text = ttree-lv2-text.
-    append node1 to node_table.
+	concatenate ttree-lv0-key ttree-lv1-key into str1. 
+	node1-relatkey = str1.
+	node1-relatship = cl_gui_simple_tree=>relat_last_child.
+	node1-hidden = ''.
+	node1-disabled = ''.
+	node1-isfolder = 'x'.
+	node1-n_image = '@5B@'.
+	node1-exp_image = '@5B@'.
+	clear node1-expander.
+	node1-text = ttree-lv2-text.
+	append node1 to node_table.
   endloop. 
 
   call method wa_tree->add_nodes
