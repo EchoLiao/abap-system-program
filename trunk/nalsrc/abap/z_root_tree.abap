@@ -9,35 +9,46 @@ data: begin of ttree,
 	lv2 type tnode,
     end of ttree.
 data: tree_tab like table of ttree with header line.
-data: tree_lv0, tree_lv1, tree_lv2, tree_lv3 type String,
-    str_tree type String.
+data: tree_lv0 type String, tree_lv1 type String,
+      tree_lv2 type String, tree_lv3 type String,
+      tree_lv4 type String, str_tree type String,
+      tree_lv5 type String.
 data: strtab type table of String,
       strtab_tree type table of String,
       strtab_keytext type table of String.
-tree_lv0 = 'rt,飞机票订票系统,db,基础数据,scarr,航线信息.' & " 关键字不能长于12个字符!!!!! 
-	   'rt,飞机票订票系统,db,基础数据,scounter,售票柜台信息.' &
-	   'rt,飞机票订票系统,db,基础数据,spfli,航班信息.' &
-	   'rt,飞机票订票系统,db,基础数据,sflight,具体班次信息.' &
+tree_lv0 = 'rt,飞机票订票系统,db,基础数据,dbscarr,航线信息.' & " 关键字不能长于12个字符!!!!! 
+	   'rt,飞机票订票系统,db,基础数据,dbscounter,售票柜台信息.' &
+	   'rt,飞机票订票系统,db,基础数据,dbspfli,航班信息.' &
+	   'rt,飞机票订票系统,db,基础数据,dbsflight,具体班次信息.' &
 	   '' .
 tree_lv1 = 'rt,飞机票订票系统,qu,查询,scarr,航线查询.' & 
 	   'rt,飞机票订票系统,qu,查询,scounter,售票柜台信息查询.' &
 	   'rt,飞机票订票系统,qu,查询,spfli,航班查询.' &
 	   'rt,飞机票订票系统,qu,查询,sflight,具体班次信息查询.' &
+	   'rt,飞机票订票系统,qu,查询,sbook,订票信息查询.' &
 	   '' .
-tree_lv2 = 'rt,飞机票订票系统,hq,行情,leave,去程.' &
+tree_lv2 = 'rt,飞机票订票系统,bk,订票,bksbook,订票.' &
+	   '' .
+tree_lv3 = 'rt,飞机票订票系统,hq,行情,leave,去程.' &
 	   'rt,飞机票订票系统,hq,行情,back,回程.' &
 	   '' .
-tree_lv3 = 'rt,飞机票订票系统,ggb,公告板,hkgstjp,航空公司特价票.' &
+tree_lv4 = 'rt,飞机票订票系统,ggb,公告板,hkgstjp,航空公司特价票.' &
 	   'rt,飞机票订票系统,ggb,公告板,cstjp,城市特价票.' &
+	   '' .
+tree_lv5 = 'rt,飞机票订票系统,game,game,cs,水上飞机.' &
+           'rt,飞机票订票系统,game,game,rock,歼20.' &
 	   '' .
 
 append tree_lv0 to strtab.
 append tree_lv1 to strtab.
 append tree_lv2 to strtab.
 append tree_lv3 to strtab.
+append tree_lv4 to strtab.
+append tree_lv5 to strtab.
 
-split tree_lv0 at '.' into table strtab_tree.
-loop at strtab_tree into str_tree.
+loop at strtab into tree_lv0.
+  split tree_lv0 at '.' into table strtab_tree.
+  loop at strtab_tree into str_tree.
     " write: / str_tree.
     split str_tree at ',' into table strtab_keytext.
     read table strtab_keytext index 1 into ttree-lv0-key. 
@@ -47,6 +58,7 @@ loop at strtab_tree into str_tree.
     read table strtab_keytext index 5 into ttree-lv2-key. 
     read table strtab_keytext index 6 into ttree-lv2-text. 
     append ttree to tree_tab.
+  endloop.
 endloop.
 
 
@@ -60,12 +72,24 @@ data: wa_container type scrfname value 'TREE',
       wa_alv  type ref to cl_gui_alv_grid.
 data: node_table like table of mtreesnode,
       node1 type mtreesnode.
-data wa_spfli type table of ttree with header line.
-data wa_sflight type table of sflight.
+data: wa_scarr type table of scarr,
+      wa_scounter type table of scounter,
+      wa_spfli type table of spfli,
+      wa_sflight type table of sflight,
+      wa_sbook type table of sbook.
 data: NODEKEY(200) value 'node',
       NODETEXT(200) value 'node'.
 class lcl_application definition deferred.
-data event_receiver type ref to lcl_application.
+
+define show_alv.
+  select * into table &2 from &1.
+*    create object wa_alv
+*        exporting i_parent = wa_custom_container. 
+  call method wa_alv->set_table_for_first_display
+    exporting i_structure_name = '&1'
+    changing  it_outtab        = &2.
+end-of-definition.
+
 
 *---------------------------------------------------------------------*
 *       class lcl_application definition *
@@ -76,6 +100,9 @@ class lcl_application definition.
         for event node_double_click
         of cl_gui_simple_tree
           importing node_key.
+    methods handle_alv_double_click
+      for event double_click of cl_gui_alv_grid
+        importing e_row e_column.
 endclass.                    "lcl_application definition
 *---------------------------------------------------------------------*
 *       class lcl_application implementation *
@@ -85,25 +112,31 @@ class lcl_application implementation.
     NODEKEY = node_key.
     read table node_table with key node_key = node_key into node1.
     NODETEXT = node1-text.
+    perform clear_alv_var.
     clear wa_sflight.
-    select * into table wa_sflight from sflight
-        where carrid = node1-node_key+2(2)
-          and connid = node1-node_key+4(4).
-*    create object wa_alv
-*        exporting i_parent = wa_custom_container. 
-    call method wa_alv->set_table_for_first_display
-      exporting i_structure_name = 'sflight'
-      changing  it_outtab        = wa_sflight.
+    if node1-node_key eq 'scarr'.
+      show_alv scarr wa_scarr.
+    elseif node1-node_key eq 'scounter'.
+      show_alv scounter wa_scounter.
+    elseif node1-node_key eq 'spfli'.
+      show_alv spfli wa_spfli.
+    elseif node1-node_key eq 'sflight'.
+      show_alv sflight wa_sflight.
+    elseif node1-node_key eq 'sbook'.
+      show_alv sbook wa_sbook.
+    elseif node1-node_key eq 'bksbook'.
+      leave to screen 101.
+    endif.
   endmethod.                    "handle_node_double_click
+  method handle_alv_double_click.
+    message i208(00) with 's1'.
+  endmethod.
 endclass.                    "lcl_application implementation 
 
 
 data g_application type ref to lcl_application.
 
 start-of-selection.
-  " select * into table wa_spfli from tree_tab
-    " order by countryfr carrid ascending. 
-    " move tree_tab[] to wa_spfli.
   create object g_application. 
   set screen 100.
 
@@ -117,8 +150,10 @@ module status_0100 output.
   if wa_custom_container is initial.
     perform create_tree.
   endif.
+*将已定义的双击事件分配至树对象
+  set handler g_application->handle_node_double_click for wa_tree.
+  set handler g_application->handle_alv_double_click for wa_alv.
 endmodule.                 " status_0100  output
-
 
 *&---------------------------------------------------------------------*
 *&      module  user_command_0100  input *       text
@@ -132,6 +167,14 @@ module user_command_0100 input.
   endcase. 
 endmodule.                 " user_command_0100  input
 
+module user_command_0101 input.
+  save_ok = ok_code. 
+  clear ok_code.
+  case save_ok.
+    when 'QB'.
+      leave to screen 100. 
+  endcase. 
+endmodule.                 " user_command_0100  input
 
 *&---------------------------------------------------------------------*
 *&      form  create_tree *       text
@@ -173,8 +216,8 @@ form create_tree .
       node1-disabled = ''.
       node1-isfolder = 'x'.
 *不带icon
-      clear node1-n_image.
-      clear node1-exp_image.
+      node1-n_image = '@9Y@'.
+      node1-exp_image = '@9YB@'.
       clear node1-expander.
       node1-text = ttree-lv0-text.
       append node1 to node_table.
@@ -189,8 +232,8 @@ form create_tree .
       node1-hidden = ''.
       node1-disabled = ''.
       node1-isfolder = 'x'.
-      clear node1-n_image.
-      clear node1-exp_image.
+      node1-n_image = '@DF@'.
+      node1-exp_image = '@DF@'.
       clear node1-expander.
 *节点显示carrid
       node1-text = ttree-lv1-text.
@@ -200,8 +243,7 @@ form create_tree .
     countryfr = ttree-lv0-key. " 意义见 if 语句!!!
     carrid = ttree-lv1-key.
     clear node1.
-    concatenate ttree-lv0-key ttree-lv1-key 
-	 ttree-lv2-key into node1-node_key.
+    node1-node_key = ttree-lv2-key.
     concatenate ttree-lv0-key ttree-lv1-key into str1. 
     node1-relatkey = str1.
     node1-relatship = cl_gui_simple_tree=>relat_last_child.
@@ -246,10 +288,13 @@ form create_tree .
     .
 
   if sy-subrc <> 0.
-* message id sy-msgid type sy-msgty number sy-msgno
-*         with sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
   endif.
-
-*将已定义的双击事件分配至树对象
-  set handler g_application->handle_node_double_click for wa_tree.
 endform.                    " create_tree
+
+form clear_alv_var.
+  clear wa_scarr.
+  clear wa_scounter.
+  clear wa_spfli.
+  clear wa_sflight.
+  clear wa_sbook.
+endform.
