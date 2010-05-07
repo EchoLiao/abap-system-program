@@ -63,9 +63,6 @@ module status_0100 output.
       exporting
         i_structure_name = 'spfli'
       changing
-
-
-
         it_outtab        = wa_spfli.
 *alv对象分配双击事件 
     create object event_receiver.
